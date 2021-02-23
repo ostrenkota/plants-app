@@ -1,0 +1,41 @@
+.card{
+  height: 96px;
+  margin-top: 10px;
+
+  &__menu{
+    position: absolute;
+    right: 0;
+    color: #4986CC;
+  }
+
+  &__image{
+    position: absolute;
+    width: 72px;
+    height: 72px;
+    top: calc(50% - 71px/2 + 0.5px);
+    left: 10px;
+    border-radius: 10px;
+  }
+
+  &__text{
+    position: absolute;
+    left: 92px;
+    top: 10px;
+
+    &_name{
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 24px;
+      margin: 0;
+      letter-spacing: 0.38px;
+    }
+
+    &_description{
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: -0.32px;
+      color: #818C99;
+      margin-top: 5px;
+    }
+  }
+}
