@@ -8,8 +8,8 @@ import Icon28AddOutline from "@vkontakte/icons/dist/28/add_outline";
 const plantsList = [
   {
     img: "https://fiftyflowers.ru/image/catalog/blog/%D0%A3%D1%85%D0%BE%D0%B4%20%D0%B7%D0%B0%20%20%D0%BA%D0%B0%D0%BA%D1%82%D1%83%D1%81%D0%B0%D0%BC%D0%B8/kaktus-3.jpg",
-    name: "Колючий Игнат",
-    description: "своеобразные колючие растения, приспособившиеся к жизни в засу..."
+    name: "Очень-очень Колючий Игнат",
+    description: "своеобразные колючие растения, приспособившиеся к жизни в засуikbdsq rkbvfndd"
   },
   {
     img: "https://fiftyflowers.ru/image/catalog/blog/%D0%A3%D1%85%D0%BE%D0%B4%20%D0%B7%D0%B0%20%20%D0%BA%D0%B0%D0%BA%D1%82%D1%83%D1%81%D0%B0%D0%BC%D0%B8/kaktus-3.jpg",
@@ -48,9 +48,9 @@ class MainPanel extends Component {
 
   render() {
     return (
-      <>
+      <div className="main-panel">
         <PanelHeader
-            className="main-panel-header" left={<PanelHeaderButton><Icon28AddOutline /></PanelHeaderButton>} separator={false} >Мой Сад</PanelHeader>
+            className="main-panel__header" left={<PanelHeaderButton><Icon28AddOutline /></PanelHeaderButton>} separator={false} >Мой Сад</PanelHeader>
         <Search
           disabled={!this.state.plantsList?.length}
           value={this.state.search}
@@ -59,11 +59,11 @@ class MainPanel extends Component {
           className={!this.state.plantsList?.length ?"search-bar_disabled" : ""}
         />
         {this.state.plantsList?.length ? (
-          <PlantsList plantsList={plantsList}/>
+          <PlantsList plantsList={plantsList} onCardClick={this.props.onCardClick}/>
         ) : (
           <EmptyLayout />
         )}
-      </>
+      </div>
     );
   }
 }

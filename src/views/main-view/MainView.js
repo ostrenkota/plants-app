@@ -9,28 +9,29 @@ class MainView extends Component {
         super(props);
 
         this.state = {
-            activePanel: 'main-panel'
+            activePanel: 'main-panel',
+            selectedPlant: null
         }
+    }
+
+    onCardClick = (selectedPlant) => {
+        this.setState({
+            activePanel: 'card-panel',
+            selectedPlant
+        })
     }
 
     render() {
         return (
             <View id={this.props.id} activePanel={this.state.activePanel}>
                 <Panel id="main-panel">
-                    <MainPanel />
+                    <MainPanel onCardClick={this.onCardClick}/>
                 </Panel>
                 <Panel id="card-panel">
-                    <CardPanel />
-                    <button onClick={() => this.togglePanel("main-panel")}>toggle</button>
+                    <CardPanel selectedPlant={this.state.selectedPlant}/>
                 </Panel>
             </View>
         );
-    }
-
-    togglePanel = panelId => {
-        this.setState({
-            activePanel: panelId
-        })
     }
 }
 

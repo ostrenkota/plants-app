@@ -2,6 +2,10 @@
   opacity: 0.4;
 }
 
-.main-panel-header {
-  text-align: center;
+.main-panel {
+  padding: 10px;
+
+  &__header {
+    text-align: center;
+  }
 }

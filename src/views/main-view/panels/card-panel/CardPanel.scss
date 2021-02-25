@@ -1,0 +1,81 @@
+.open-card{
+
+  &__wrapper {
+    padding: 10px;
+    position: relative;
+    top: -200px;
+  }
+
+  &__gradient {
+    position: relative;
+    top: -138px;
+    height: 140px;
+    width: 100%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.0001) 0%, rgba(255, 255, 255, 0.0156863) 9.22%, rgba(255, 255, 255, 0.054902) 18.76%, rgba(255, 255, 255, 0.117647) 28.48%, rgba(255, 255, 255, 0.2) 38.19%, rgba(255, 255, 255, 0.290196) 47.75%, rgba(255, 255, 255, 0.392157) 56.99%, rgba(255, 255, 255, 0.501961) 65.75%, rgba(255, 255, 255, 0.607843) 73.87%, rgba(255, 255, 255, 0.709804) 81.18%, rgba(255, 255, 255, 0.8) 87.52%, rgba(255, 255, 255, 0.882353) 92.74%, rgba(255, 255, 255, 0.945098) 96.66%, rgba(255, 255, 255, 0.984314) 99.14%, #FFFFFF 100%);
+  }
+
+  &__header {
+    margin-bottom: 14px;
+  }
+
+  &__image{
+    height: 287px;
+  }
+
+  &__title{
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 26px;
+  }
+
+  &__subtitle{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 26px;
+    color: #757575;
+  }
+
+  &__description{
+  padding: 10px;
+
+    &_title{
+      margin: 0;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 34px;
+    }
+
+    &_icon{
+      margin: 4px;
+      float: left;
+      display: inline;
+      color: #4986CC;
+    }
+
+    &_text{
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 22px;
+      letter-spacing: 0.38px;
+    }
+  }
+
+  &__care{
+    margin: 10px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 34px;
+    letter-spacing: 0.38px;
+  }
+
+  &__main-season{
+    height: 96px;
+  }
+
+  &__rest-seasons{
+    height: 96px;
+  }
+}
