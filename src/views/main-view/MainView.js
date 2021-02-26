@@ -21,6 +21,12 @@ class MainView extends Component {
         })
     }
 
+    onBackClick = () => {
+        this.setState({
+            activePanel: 'main-panel'
+        })
+    }
+
     render() {
         return (
             <View id={this.props.id} activePanel={this.state.activePanel}>
@@ -28,7 +34,7 @@ class MainView extends Component {
                     <MainPanel onCardClick={this.onCardClick}/>
                 </Panel>
                 <Panel id="card-panel">
-                    <CardPanel selectedPlant={this.state.selectedPlant}/>
+                    <CardPanel onBackClick={this.onBackClick} selectedPlant={this.state.selectedPlant}/>
                 </Panel>
             </View>
         );

@@ -1,0 +1,102 @@
+.title{
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 34px;
+}
+
+.care-card {
+  height: 96px;
+  width: 100%;
+  overflow: hidden;
+  padding: 0px 0px;
+
+  &__wrapper {
+    position: relative;
+    height: 96px;
+  }
+
+  &__image{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    filter: blur(1px);
+  }
+
+  &__content {
+    box-sizing: border-box;
+    position: relative;
+    padding: 12px 12px;
+    height: 100%;
+    color: white;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0.45px;
+  }
+
+  &__info{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.38px;
+  }
+
+  &__icon{
+    float: left;
+    clear: both;
+  }
+
+  li{
+     padding-top: 5px;
+
+    p{
+      margin: 4px;
+    }
+  }
+}
+
+.closed-card{
+  height: 96px;
+  width: 100%;
+  overflow: hidden;
+
+  transition: transform 0.1s ease-in-out;
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  &__wrapper{
+    position: relative;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__image{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    filter: blur(1px);
+  }
+
+  &__name{
+    position: relative;
+    color: white;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 34px;
+    letter-spacing: 0.38px;
+  }
+}
+
+.CardGrid--android.CardGrid--sizeX-compact {
+  padding: 0;
+}

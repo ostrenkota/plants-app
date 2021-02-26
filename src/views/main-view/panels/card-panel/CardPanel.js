@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {Card, CardGrid, Group, Title, Text} from "@vkontakte/vkui";
+import {Card, Title, Text, Button} from "@vkontakte/vkui";
 import "./CardPanel.scss";
 import { Icon24InfoCircleOutline } from '@vkontakte/icons';
+import CareBlock from "./components/CareBlock";
+import { Icon28ArrowLeftOutline } from '@vkontakte/icons';
 
 class CardPanel extends Component {
     constructor(props) {
@@ -11,6 +13,7 @@ class CardPanel extends Component {
     render() {
         return (
             <>
+                <Button mode="tertiary" className="open-card__back" onClick={this.props.onBackClick}><Icon28ArrowLeftOutline/></Button>
                 <img src={this.props.selectedPlant.img} className="open-card__image" alt="Изображение растения"/>
                 <div className="open-card__gradient" />
                 <div className="open-card__wrapper">
@@ -18,30 +21,14 @@ class CardPanel extends Component {
                         <Title level="1" weight="bold">{this.props.selectedPlant.name}</Title>
                         <Text style={{ color: 'var(--text_secondary)' }}>Кактус обыкновенный</Text>
                     </div>
-                    <Card size="l" mode="shadow" className="open-card__description">
-                        <Icon24InfoCircleOutline className="open-card__description_icon"/>
-                        <p className="open-card__description_title">Описание</p>
-                        <div className="open-card__description_text">
+                    <Card size="l" mode="shadow" className="plant-description">
+                        <Icon24InfoCircleOutline className="plant-description__icon"/>
+                        <p className="plant-description__title">Описание</p>
+                        <div className="plant-description__text">
                             Родиной кактусов является Америка. Пустынные кактусы превосходно растут и развиваются в суровых условиях полупустынь, находящихся в Аргентине, Чили, Мексике, Перу и Боливии. Лесные кактусы в природных условиях можно повстречать в тропических джунглях. Пустынные, а также лесные виды кактусов имеют значительные различия, и в связи с этим то, как ухаживать за кактусом, определяется его видом.
                         </div>
                     </Card>
-                    <p className="open-card__care">Уход</p>
-                    <Card>
-                        <div className="open-card__main-season"/>
-                    </Card>
-                    <Group>
-                        <CardGrid size="s" className="open-card__rest-seasons">
-                            <Card>
-                                <div/>
-                            </Card>
-                            <Card>
-                                <div/>
-                            </Card>
-                            <Card>
-                                <div/>
-                            </Card>
-                        </CardGrid>
-                    </Group>
+                    <CareBlock />
                 </div>
             </>
         );

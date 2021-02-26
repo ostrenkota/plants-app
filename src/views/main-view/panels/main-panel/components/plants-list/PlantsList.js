@@ -6,7 +6,10 @@ const PlantsList = ({plantsList, onCardClick}) => {
         <ul>
             {
                 plantsList.map(plant =>
-                <li onClick={() => onCardClick(plant)}>
+                <li
+                    onClick={() => onCardClick(plant)}
+                    key={plant.id}
+                >
                     <PlantCard
                         img={plant.img}
                         name={plant.name}
