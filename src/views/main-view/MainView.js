@@ -31,7 +31,7 @@ class MainView extends Component {
         return (
             <View id={this.props.id} activePanel={this.state.activePanel}>
                 <Panel id="main-panel">
-                    <MainPanel onCardClick={this.onCardClick}/>
+                    <MainPanel onCardClick={this.onCardClick} openInstructionView={this.props.openInstructionView}/>
                 </Panel>
                 <Panel id="card-panel">
                     <CardPanel onBackClick={this.onBackClick} selectedPlant={this.state.selectedPlant}/>

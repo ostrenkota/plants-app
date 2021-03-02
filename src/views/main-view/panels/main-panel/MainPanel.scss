@@ -1,3 +1,8 @@
+@import "src/styles/variables";
+
+body{
+  font-family: $font;
+}
 .search-bar_disabled{
   opacity: 0.4;
 }

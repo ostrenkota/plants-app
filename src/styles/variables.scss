@@ -1,0 +1,14 @@
+$font: "TT Commons", -apple-system, system-ui, Helvetica Neue, Roboto, sans-serif;
+$blue: #4986CC;
+
+:root {
+  --secondary-backgroung-color: #4986CC;
+  --primary-font-color: black;
+  --primary-backgroung-color: white;
+}
+
+body[scheme="space_gray"] {
+  --primary-font-color: white;
+  --primary-backgroung-color: black;
+  --secondary-backgroung-color: #eeeded;
+}

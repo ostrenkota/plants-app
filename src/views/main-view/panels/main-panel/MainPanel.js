@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PanelHeader from "@vkontakte/vkui/dist/components/PanelHeader/PanelHeader";
 import "./MainPanel.scss";
 import { EmptyLayout, PlantsList } from "./components";
-import { Search, Placeholder, Button, PanelHeaderButton } from "@vkontakte/vkui";
+import { Search, PanelHeaderButton } from "@vkontakte/vkui";
 import Icon28AddOutline from "@vkontakte/icons/dist/28/add_outline";
 
 const plantsList = [
@@ -47,14 +47,35 @@ class MainPanel extends Component {
     this.setState({
       search: e.target.value,
     });
-    console.log(e.target.value);
   };
+
+  onAddClick = () => {
+    if (navigator.getUserMedia) {
+      let constraints = {
+        audio: false,
+        video: {facingMode: 'environment'}
+      };
+
+      navigator.mediaDevices.getUserMedia(constraints)
+    }
+
+    this.props.openInstructionView();
+  }
 
   render() {
     return (
       <div className="main-panel">
         <PanelHeader
-            className="main-panel__header" left={<PanelHeaderButton><Icon28AddOutline /></PanelHeaderButton>} separator={false} >Мой Сад</PanelHeader>
+            className="main-panel__header"
+            left={
+              <PanelHeaderButton onClick={this.onAddClick}>
+                <Icon28AddOutline />
+              </PanelHeaderButton>
+            }
+            separator={false}
+        >
+          Мой Сад
+        </PanelHeader>
         <Search
           disabled={!this.state.plantsList?.length}
           value={this.state.search}

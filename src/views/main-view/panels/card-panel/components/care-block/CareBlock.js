@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import {Card, CardGrid, Group} from "@vkontakte/vkui";
 import "./CareBlock.scss";
 import { Icon20WaterDropOutline, Icon20PlaceOutline } from '@vkontakte/icons';
+import "../../../../../../styles/variables.scss";
 
-import Autumn from '../../../../../resources/images/Autumn.jpg';
-import Spring from '../../../../../resources/images/Spring.jpg';
-import Winter from '../../../../../resources/images/Winter.jpg';
-import Summer from '../../../../../resources/images/Summer.jpg';
+import Autumn from '../../../../../../resources/images/Autumn.jpg';
+import Spring from '../../../../../../resources/images/Spring.jpg';
+import Winter from '../../../../../../resources/images/Winter.jpg';
+import Summer from '../../../../../../resources/images/Summer.jpg';
 
 const SEASONS = [
     {

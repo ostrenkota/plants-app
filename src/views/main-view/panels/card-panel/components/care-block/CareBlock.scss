@@ -1,4 +1,10 @@
+@import "src/styles/variables";
+
+body{
+  font-family: $font;
+}
 .title{
+  color: var(--primary-font-color);
   font-weight: bold;
   font-size: 18px;
   line-height: 34px;
@@ -8,7 +14,7 @@
   height: 96px;
   width: 100%;
   overflow: hidden;
-  padding: 0px 0px;
+  padding: 0;
 
   &__wrapper {
     position: relative;

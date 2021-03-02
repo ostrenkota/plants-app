@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {Card, Title, Text, Button} from "@vkontakte/vkui";
 import "./CardPanel.scss";
 import { Icon24InfoCircleOutline } from '@vkontakte/icons';
-import CareBlock from "./components/CareBlock";
+import CareBlock from "./components/care-block/CareBlock";
 import { Icon28ArrowLeftOutline } from '@vkontakte/icons';
+import WateringBlock from "./components/watering-block/WateringBlock";
 
 class CardPanel extends Component {
     constructor(props) {
@@ -29,6 +30,7 @@ class CardPanel extends Component {
                         </div>
                     </Card>
                     <CareBlock />
+                    <WateringBlock/>
                 </div>
             </>
         );
