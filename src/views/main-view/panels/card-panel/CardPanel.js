@@ -19,8 +19,8 @@ class CardPanel extends Component {
                 <div className="open-card__gradient" />
                 <div className="open-card__wrapper">
                     <div className="open-card__header">
-                        <Title level="1" weight="bold">{this.props.selectedPlant.name}</Title>
-                        <Text style={{ color: 'var(--text_secondary)' }}>Кактус обыкновенный</Text>
+                        <Title level="1" weight="bold" className="open-card__title">{this.props.selectedPlant.name}</Title>
+                        <Text style={{ color: 'var(--text_secondary)' }} className="open-card__subtitle">Кактус обыкновенный</Text>
                     </div>
                     <Card size="l" mode="shadow" className="plant-description">
                         <Icon24InfoCircleOutline className="plant-description__icon"/>

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PanelHeader from "@vkontakte/vkui/dist/components/PanelHeader/PanelHeader";
 import "./MainPanel.scss";
 import { EmptyLayout, PlantsList } from "./components";
-import { Search, PanelHeaderButton } from "@vkontakte/vkui";
-import Icon28AddOutline from "@vkontakte/icons/dist/28/add_outline";
+import { Search } from "@vkontakte/vkui";
+import AddPlant from "./components/AddPlant/AddPlant";
 
 const plantsList = [
   {
@@ -50,7 +50,7 @@ class MainPanel extends Component {
   };
 
   onAddClick = () => {
-    if (navigator.getUserMedia) {
+   /* if (navigator.getUserMedia) {
       let constraints = {
         audio: false,
         video: {facingMode: 'environment'}
@@ -59,7 +59,7 @@ class MainPanel extends Component {
       navigator.mediaDevices.getUserMedia(constraints)
     }
 
-    this.props.openInstructionView();
+    this.props.openInstructionView();*/
   }
 
   render() {
@@ -68,9 +68,7 @@ class MainPanel extends Component {
         <PanelHeader
             className="main-panel__header"
             left={
-              <PanelHeaderButton onClick={this.onAddClick}>
-                <Icon28AddOutline />
-              </PanelHeaderButton>
+              <AddPlant />
             }
             separator={false}
         >

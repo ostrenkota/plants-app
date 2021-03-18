@@ -14,6 +14,10 @@ class InstructionPanel extends Component {
         return (
             <div>
                 <div className="instruction__header">
+                    <svg height="15vh" width="100%">
+                        <ellipse cx="50%" cy="30%" rx="60%" ry="60%"
+                                 style={{fill:"var(--secondary-backgroung-color)"}} />
+                    </svg>
                     <p className="instruction__title">3 секрета правильного фото</p>
                 </div>
                 <Card size="l" mode="shadow" className="instruction-card">

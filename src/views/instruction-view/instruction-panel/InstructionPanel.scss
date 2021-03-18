@@ -6,15 +6,13 @@ body{
   .instruction{
 
     &__header{
-      background-color: var(--secondary-backgroung-color);
       width: 100%;
       height: 15vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     &__title{
+      position: relative;
+      top: -17vh;
       font-family: $font;
       text-align: center;
       font-style: normal;

@@ -20,12 +20,11 @@ body{
   }
 
   &__gradient {
-    color: var(--primary-font-color);
     position: relative;
     top: -138px;
     height: 140px;
     width: 100%;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.0001) 0%, rgba(255, 255, 255, 0.0156863) 9.22%, rgba(255, 255, 255, 0.054902) 18.76%, rgba(255, 255, 255, 0.117647) 28.48%, rgba(255, 255, 255, 0.2) 38.19%, rgba(255, 255, 255, 0.290196) 47.75%, rgba(255, 255, 255, 0.392157) 56.99%, rgba(255, 255, 255, 0.501961) 65.75%, rgba(255, 255, 255, 0.607843) 73.87%, rgba(255, 255, 255, 0.709804) 81.18%, rgba(255, 255, 255, 0.8) 87.52%, rgba(255, 255, 255, 0.882353) 92.74%, rgba(255, 255, 255, 0.945098) 96.66%, rgba(255, 255, 255, 0.984314) 99.14%, #FFFFFF 100%);
+    background: var(--gradient);
   }
 
   &__header {
@@ -39,7 +38,7 @@ body{
   &__title{
     color: var(--primary-font-color);
     font-weight: bold;
-    font-size: 32px;
+    font-size: 28px;
     line-height: 26px;
   }
 
@@ -47,7 +46,7 @@ body{
     color: var(--primary-font-color);
     font-style: normal;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 26px;
   }
 }
