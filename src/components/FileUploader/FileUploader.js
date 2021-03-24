@@ -21,15 +21,20 @@ class FileUploader extends Component {
         this.props.onFileSelect(fileUploaded);
     };
 
+    onInputClick = event => {
+        event.target.value = '';
+        this.props.onInputClick();
+    }
+
     render() {
         return (
             <>
                 { React.cloneElement( this.props.children, { onClick: this.handleAddClick } ) }
                 <input
                     type="file"
-                    accept="image/!*"
                     ref={this.hiddenFileInput}
                     onChange={this.handleInputChange}
+                    onClick={this.onInputClick}
                     style={{display: 'none'}}
                 />
             </>

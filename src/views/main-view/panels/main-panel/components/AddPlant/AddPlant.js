@@ -2,14 +2,28 @@ import React, {Component} from 'react';
 import {PanelHeaderButton} from "@vkontakte/vkui";
 import Icon28AddOutline from "@vkontakte/icons/dist/28/add_outline";
 import FileUploader from "../../../../../../components/FileUploader/FileUploader";
-import PermissionModal from "../../../../../../components/PermissionModal/PermissionModal";
+import { connect } from "react-redux";
+import {clearModal, openModal} from "../../../../../../redux/actions/modal";
 
 class AddPlant extends Component {
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (!prevProps.dialogResult && this.props.dialogResult) {
+            if (this.props.dialogResult.confirm) {
+                this.setState({
+                    permission: true,
+                    initFileInput: true
+                });
+                this.sendPermissionToServer();
+            }
+            this.props.clearModal();
+        }
+    }
+
     constructor(props) {
         super(props);
         this.state = {
             permission: false,
-            shouldShowModal: false,
             initFileInput: false
 
         }
@@ -17,32 +31,12 @@ class AddPlant extends Component {
 
     render() {
         return (
-            <>
-                <FileUploader onFileSelect={this.onFileSelect} onAddClick={this.onAddClick} initFileInput={this.state.initFileInput}>
-                    <PanelHeaderButton>
-                        <Icon28AddOutline />
-                    </PanelHeaderButton>
-                </FileUploader>
-                {
-                 this.state.shouldShowModal && <PermissionModal onClick={this.onModalClick}/>
-                }
-            </>
+           <FileUploader onInputClick={this.onInputClick} onFileSelect={this.onFileSelect} onAddClick={this.onAddClick} initFileInput={this.state.initFileInput}>
+                <PanelHeaderButton>
+                    <Icon28AddOutline />
+                </PanelHeaderButton>
+            </FileUploader>
         );
-    }
-
-    onModalClick = (approve) => {
-        if (approve) {
-            this.setState({
-                initFileInput: true,
-                shouldShowModal: false,
-                permission: true
-            })
-            this.sendPermissionToServer();
-            return;
-        }
-        this.setState({
-            shouldShowModal: false
-        })
     }
 
     onAddClick = () => {
@@ -52,13 +46,14 @@ class AddPlant extends Component {
             })
             return;
         }
-        this.setState({
-            shouldShowModal: true
-        })
+        this.props.openModal('cameraModal');
     }
 
     onFileSelect = (file) => {
         console.log(file);
+    }
+
+    onInputClick = () => {
         this.setState({
             initFileInput: false
         })
@@ -69,4 +64,11 @@ class AddPlant extends Component {
     }
 }
 
-export default AddPlant;
+const mapStateToProps = (state) => {
+    return {
+        modalId: state.modal.id,
+        dialogResult: state.modal.dialogResult
+    }
+}
+
+export default connect(mapStateToProps, { openModal, clearModal })(AddPlant);

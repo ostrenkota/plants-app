@@ -5,6 +5,7 @@ import { Icon24InfoCircleOutline } from '@vkontakte/icons';
 import CareBlock from "./components/care-block/CareBlock";
 import { Icon28ArrowLeftOutline } from '@vkontakte/icons';
 import WateringBlock from "./components/watering-block/WateringBlock";
+import NotesBlock from "./components/notes-block/NotesBlock";
 
 class CardPanel extends Component {
     constructor(props) {
@@ -29,8 +30,9 @@ class CardPanel extends Component {
                             Родиной кактусов является Америка. Пустынные кактусы превосходно растут и развиваются в суровых условиях полупустынь, находящихся в Аргентине, Чили, Мексике, Перу и Боливии. Лесные кактусы в природных условиях можно повстречать в тропических джунглях. Пустынные, а также лесные виды кактусов имеют значительные различия, и в связи с этим то, как ухаживать за кактусом, определяется его видом.
                         </div>
                     </Card>
-                    <CareBlock />
+                    <CareBlock/>
                     <WateringBlock/>
+                    <NotesBlock/>
                 </div>
             </>
         );

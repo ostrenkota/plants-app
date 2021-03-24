@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './MainView.scss';
 import {Panel, View} from "@vkontakte/vkui";
 import {CardPanel, MainPanel} from "./panels";
+import Modal from "../../components/modals/Modal";
 
 
 class MainView extends Component {
@@ -29,7 +30,7 @@ class MainView extends Component {
 
     render() {
         return (
-            <View id={this.props.id} activePanel={this.state.activePanel}>
+            <View id={this.props.id} activePanel={this.state.activePanel} modal={<Modal />}>
                 <Panel id="main-panel">
                     <MainPanel onCardClick={this.onCardClick} openInstructionView={this.props.openInstructionView}/>
                 </Panel>

@@ -10,10 +10,10 @@ const PlantCard = ({img, name, description}) => {
             <div className="card">
                 <img src={img} className="card__image"/>
                 <div className="card__text">
-                    <p className="card__text_name">
+                    <p className="card__name">
                         {name}
                     </p>
-                    <p className="card__text_description">
+                    <p className="card__description">
                         {description}
                     </p>
                 </div>

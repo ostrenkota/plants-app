@@ -1,0 +1,28 @@
+@import "src/styles/variables";
+
+.notes{
+  .Subhead{
+    color: var(--primary-font-color);
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 34px;
+    margin: 0;
+    padding: 0;
+  }
+  .FormItem{
+    padding: 0;
+    font-family: $font;
+  }
+  .Textarea__el{
+    font-family: $font;
+  }
+
+  &__edit{
+    position: absolute;
+    right: 10px;
+    color: $blue;
+    margin-top: 5px;
+  }
+}
+
+
