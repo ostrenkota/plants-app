@@ -1,6 +1,70 @@
-.modal-card{
+@import "src/styles/variables";
 
-  &__icon{
-    transform: scale(1.2);
+body{
+  font-family: $font;
+  .modal-card{
+
+    &__icon{
+      transform: scale(1.2);
+    }
+  }
+
+  .instruction{
+
+    &__header{
+      width: 100%;
+      height: 15vh;
+    }
+
+    &__title{
+      position: relative;
+      top: -17vh;
+      font-family: $font;
+      text-align: center;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 30px;
+      color: var(--primary-backgroung-color);
+    }
+
+    &__button-container{
+      margin-bottom: 10px;
+    }
+
+    &__button{
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
+  .instruction-card {
+    margin: 10px 10px;
+
+    &__title{
+      padding-top: 10px;
+      margin: 0;
+      font-family: $font;
+      color: var(--primary-font-color);;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 22px;
+      text-align: center;
+      letter-spacing: -0.3px;
+    }
+
+    &__photos{
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    &__photo{
+      margin: 10px 0;
+      height: 80px;
+    }
   }
 }

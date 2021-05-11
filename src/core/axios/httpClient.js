@@ -1,5 +1,12 @@
 import axios from "axios";
 
-axios.defaults.baseURL  = "http://localhost:8080";
+const http = axios.create({
+    headers: {
+       // Authorization: `Bearer ${window.location.search.slice(1)}`
+        Authorization: `Bearer vk_user_id=11111`
+    }
+});
 
-export default axios;
+http.defaults.baseURL  = "http://localhost:8888/api";
+
+export default http;

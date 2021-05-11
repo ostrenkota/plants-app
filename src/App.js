@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import MainView from "./views/main-view/MainView";
 import { Root } from '@vkontakte/vkui';
-import InstructionView from "./views/instruction-view/InstructionView";
 
 class App extends Component {
     constructor(props) {
@@ -15,16 +14,9 @@ class App extends Component {
     render() {
         return (
             <Root activeView={this.state.selectedViewId}>
-                <MainView id="main-view" openInstructionView={this.openInstructionView} />
-                <InstructionView id="instruction-view" openMainView={this.openMainView} />
+                <MainView id="main-view" />
             </Root>
         );
-    }
-
-    openInstructionView = () => {
-        this.setState({
-            selectedViewId: 'instruction-view'
-        })
     }
 
     openMainView = () => {
