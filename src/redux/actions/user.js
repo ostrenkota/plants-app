@@ -9,7 +9,7 @@ const updatePermission = () => ({
     type: 'USER:UPDATE_PERMISSION'
 });
 
-export const updatePermissionAndSendToServer = () => async dispatch => {
+export const fetchUser = () => async dispatch => {
     const user = await plantsApi.getUser();
     console.log('user', user);
     dispatch(setUser(user));

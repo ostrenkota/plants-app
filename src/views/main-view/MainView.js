@@ -3,8 +3,9 @@ import './MainView.scss';
 import {Panel, View} from "@vkontakte/vkui";
 import {CardPanel, MainPanel} from "./panels";
 import Modal from "../../components/modals/Modal";
-import InstructionPanel from "./panels/instruction-panel/InstructionPanel";
 import { connect } from "react-redux";
+import InstructionPanel from "./panels/instruction-panel/InstructionPanel";
+
 
 
 class MainView extends Component {

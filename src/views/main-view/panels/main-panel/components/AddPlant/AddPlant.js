@@ -5,7 +5,7 @@ import FileUploader from "../../../../../../components/FileUploader/FileUploader
 import { connect } from "react-redux";
 import {clearModal, openModal} from "../../../../../../redux/actions/modal";
 import {openInstruction, clearInstruction} from "../../../../../../redux/actions/instruction";
-import {updatePermissionAndSendToServer} from "../../../../../../redux/actions/user";
+import {fetchUser} from "../../../../../../redux/actions/user";
 
 class AddPlant extends Component {
 
@@ -95,5 +95,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    { openModal, clearModal, openInstruction, clearInstruction, updatePermissionAndSendToServer }
+    { openModal, clearModal, openInstruction, clearInstruction, updatePermissionAndSendToServer: fetchUser }
 )(AddPlant);

@@ -7,7 +7,7 @@ import App from "./App";
 import httpClient from "./core/axios/httpClient";
 import plantsApi from "./core/axios/api/plantsApi";
 import {useDispatch} from "react-redux";
-import {updatePermissionAndSendToServer} from "./redux/actions/user";
+import {fetchUser} from "./redux/actions/user";
 
 const AppModule = () => {
 	const [activePanel, setActivePanel] = useState('home');
@@ -31,7 +31,7 @@ const AppModule = () => {
 			setPopout(null);
 		}
 		fetchData();
-		dispatch(updatePermissionAndSendToServer());
+		dispatch(fetchUser());
 	}, []);
 
 	const go = e => {
