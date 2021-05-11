@@ -5,7 +5,7 @@ const PlantsList = ({plantsList, onCardClick}) => {
     return(
         <ul>
             {
-                plantsList.map(plant =>
+                plantsList?.map?.(plant =>
                 <li
                     onClick={() => onCardClick(plant)}
                     key={plant.id}

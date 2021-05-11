@@ -4,8 +4,10 @@ import "./MainPanel.scss";
 import { EmptyLayout, PlantsList } from "./components";
 import { Search } from "@vkontakte/vkui";
 import AddPlant from "./components/AddPlant/AddPlant";
+import {connect} from "react-redux";
+import {serverUrl} from "../../../../core/axios/httpClient";
 
-const plantsList = [
+/*const plantsList = [
   {
     id: 1,
     img: "https://rastenievod.com/wp-content/uploads/2017/05/1-24.jpg",
@@ -30,7 +32,7 @@ const plantsList = [
     name: "Орхидея белая",
     description: "Орхидея – это тропический цветок, который в последние годы полюбился россиянам. Как ухаживать за растением в домашних условиях..."
   }
-]
+]*/
 
 
 class MainPanel extends Component {
@@ -38,8 +40,7 @@ class MainPanel extends Component {
     super(props);
 
     this.state = {
-      plantsList,
-      search: "",
+      search: ""
     };
   }
 
@@ -48,6 +49,10 @@ class MainPanel extends Component {
       search: e.target.value,
     });
   };
+
+  getFilteredPlants = () => {
+    return !this.state.search ? this.props.plantsList : this.props.plantsList.filter(plant => plant.name.include(this.state.search));
+  }
 
   render() {
     return (
@@ -68,8 +73,8 @@ class MainPanel extends Component {
           after={null}
           className={!this.state.plantsList?.length ?"search-bar_disabled" : ""}
         />
-        {this.state.plantsList?.length ? (
-          <PlantsList plantsList={plantsList} onCardClick={this.props.onCardClick}/>
+        {this.props.plantsList?.length ? (
+          <PlantsList plantsList={this.getFilteredPlants()} onCardClick={this.props.onCardClick}/>
         ) : (
           <EmptyLayout />
         )}
@@ -78,4 +83,14 @@ class MainPanel extends Component {
   }
 }
 
-export default MainPanel;
+const mapStateToProps = state => ({
+  plantsList: state.user?.userData?.plants?.map(plant => ({
+    id: plant._id,
+    img: `${serverUrl}/img/${plant.picture}`,
+    name: plant.plantName,
+    description: plant.description,
+    plantId: plant.plantId
+  })) || []
+});
+
+export default connect(mapStateToProps, {})(MainPanel);
