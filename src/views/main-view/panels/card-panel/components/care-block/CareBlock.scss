@@ -103,6 +103,34 @@ body{
   }
 }
 
+.feeding{
+  padding: 10px;
+  margin-bottom: 10px;
+
+  &__title{
+    color: var(--primary-font-color);
+    margin: 0;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 34px;
+  }
+
+  &__icon{
+    margin: 4px 8px 4px 4px;
+    float: left;
+    display: inline;
+  }
+
+  &__text{
+    color: var(--primary-font-color);
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 22px;
+    letter-spacing: 0.38px;
+  }
+}
+
 .CardGrid--android.CardGrid--sizeX-compact {
   padding: 0;
 }

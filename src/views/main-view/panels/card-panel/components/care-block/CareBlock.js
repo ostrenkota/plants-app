@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-import {Card, CardGrid, Group} from "@vkontakte/vkui";
+import {Card, CardGrid, ContentCard, Group} from "@vkontakte/vkui";
 import "./CareBlock.scss";
-import { Icon20WaterDropOutline, Icon20PlaceOutline } from '@vkontakte/icons';
+import {Icon20WaterDropOutline, Icon20PlaceOutline, Icon24InfoCircleOutline} from '@vkontakte/icons';
 import "../../../../../../styles/variables.scss";
 
 import Autumn from '../../../../../../resources/images/Autumn.jpg';
 import Spring from '../../../../../../resources/images/Spring.jpg';
 import Winter from '../../../../../../resources/images/Winter.jpg';
 import Summer from '../../../../../../resources/images/Summer.jpg';
+import {Fertilizer} from "../../../../../../resources/icons";
 
 const SEASONS = [
     {
@@ -60,7 +61,7 @@ function getCurrentSeason() {
             super(props);
 
             this.state = {
-                selectedSeasonIndex: getCurrentSeason()
+                selectedSeasonIndex: getCurrentSeason(),
             }
         }
 
@@ -131,6 +132,11 @@ function getCurrentSeason() {
                             </Card>
                         </CardGrid>
                     </Group>
+                    <Card size="l" mode="shadow" className="feeding">
+                        <Fertilizer className="feeding__icon"/>
+                        <p className="feeding__title">Удобрения</p>
+                        <div className="feeding__text"> {this.props.feeding} </div>
+                    </Card>
                 </div>
             );
         }

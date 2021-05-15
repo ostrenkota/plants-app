@@ -21,6 +21,7 @@ class CardPanel extends Component {
         this.setState({
             plantInfo: plantInfo || {}
         });
+        console.log(this.state.plantInfo);
     }
 
     render() {
@@ -41,7 +42,7 @@ class CardPanel extends Component {
                             {this.state.plantInfo?.description || ''}
                         </div>
                     </Card>
-                    <CareBlock seasonsInfo={this.state.plantInfo?.seasonsInfo}/>
+                    <CareBlock seasonsInfo={this.state.plantInfo?.seasonsInfo} feeding={this.state.plantInfo?.feeding}/>
                     <WateringBlock plant={this.props.selectedPlant}/>
                     <NotesBlock plantObjectId={this.props.selectedPlant.id} note={this.props.selectedPlant.note}/>
                 </div>
