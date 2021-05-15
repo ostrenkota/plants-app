@@ -12,3 +12,9 @@ ul, li {
 li {
   list-style: none;
 }
+
+.disable-click {
+  button {
+    pointer-events: none;
+  }
+}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import { Card, IconButton, } from "@vkontakte/vkui";
 import "./PlantCard.scss";
 import Icon24MoreHorizontal from "@vkontakte/icons/dist/24/more_horizontal";
@@ -6,6 +6,28 @@ import AdditionalOptions from "../../../../../../components/AdditionalOptions/Ad
 
 const PlantCard = ({img, name, description}) => {
     const [additionalOptionsOpen, setAdditionalOptionsOpen] = useState(false);
+
+    const bodyClickListener = useCallback( e => {
+        if (e.target.closest('.additional-options') || e.target.classList.contains('additional-options')) {
+            return;
+        }
+        e.stopPropagation();
+        clearBodyClickBlocking();
+    }, []);
+
+    const onClickAdditionalOptions = e => {
+        e.stopPropagation();
+        setAdditionalOptionsOpen(true);
+
+        document.addEventListener('click', bodyClickListener, true);
+        document.body.classList.add('disable-click');
+    }
+
+    const clearBodyClickBlocking = () => {
+        setAdditionalOptionsOpen(false);
+        document.removeEventListener('click', bodyClickListener, true);
+        document.body.classList.remove('disable-click');
+    }
 
     return(
         <Card size="l" mode="shadow">
@@ -19,9 +41,9 @@ const PlantCard = ({img, name, description}) => {
                         {description}
                     </p>
                 </div>
-                <IconButton className="card__menu"><Icon24MoreHorizontal/></IconButton>
+                <IconButton className="card__menu" onClick={onClickAdditionalOptions}><Icon24MoreHorizontal/></IconButton>
                 { additionalOptionsOpen &&
-                    <AdditionalOptions />
+                    <AdditionalOptions clearBodyClickBlocking={clearBodyClickBlocking}/>
                 }
             </div>
         </Card>
