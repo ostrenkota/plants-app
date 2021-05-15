@@ -43,7 +43,7 @@ class CardPanel extends Component {
                     </Card>
                     <CareBlock/>
                     <WateringBlock/>
-                    <NotesBlock/>
+                    <NotesBlock plantObjectId={this.props.selectedPlant.id} note={this.props.selectedPlant.note}/>
                 </div>
             </>
         );

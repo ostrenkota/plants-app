@@ -2,15 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Button, Card, Div, ModalCard, ModalPage, ModalRoot, Textarea} from "@vkontakte/vkui";
 import {closeModal} from "../../redux/actions/modal";
-import {Icon48CameraOutline} from "@vkontakte/icons";
+import {Icon48CameraOutline, Icon56DoNotDisturbOutline} from "@vkontakte/icons";
 import "./Modal.scss";
-import GoodPhoto from "../../resources/images/GoodPhoto.png";
-import BadPhoto from "../../resources/images/BadPhoto.png";
-import GoodPhoto1 from "../../resources/images/GoodPhoto1.png";
-import BadPhoto1 from "../../resources/images/BadPhoto1.png";
-import GoodPhoto2 from "../../resources/images/GoodPhoto2.png";
-import BadPhoto2 from "../../resources/images/BadPhoto2.png";
-import Icon24Camera from "@vkontakte/icons/dist/24/camera";
 
 function mapStateToProps(state) {
     return {
@@ -24,16 +17,17 @@ class Modal extends Component {
         super(props);
 
         this.state = {
-            notesText: ''
+            notesText: '',
+            plantName: ''
         }
     }
 
-    onCameraModalAction = confirm => {
-        this.props.closeModal('cameraModal', { confirm })
+    onModalAction = (confirm, modalName) => {
+        this.props.closeModal(modalName, { confirm })
     }
 
-    onNotesModalAction = confirm => {
-        this.props.closeModal('notesModal', { confirm, text: this.state.notesText })
+    onModalWithTextAction = (confirm, modalName, text) => {
+        this.props.closeModal(modalName, { confirm, text: text })
     }
 
     onNotesTextChanges = (e) => {
@@ -42,37 +36,68 @@ class Modal extends Component {
         })
     }
 
+    onPlantNameChange = (e) => {
+        this.setState({
+            plantName: e.target.value
+        })
+    }
+
     render() {
         return (
             <ModalRoot activeModal={this.props.modalId}>
                 <ModalCard id="cameraModal"
-                           onClose={() => this.onCameraModalAction(false)}
+                           onClose={() => this.onModalAction(false, "cameraModal")}
                            icon={<Icon48CameraOutline className="modal-card__icon"/>}
                            header="Приложение запрашивает доступ к камере и галерее"
                            subheader="Вы сможете определять название растения по фото и добавлять его в свой сад">
                     <Div style={{display: 'flex'}}>
-                        <Button size="l" stretched style={{ marginRight: 8 }} onClick={() => this.onCameraModalAction(true)}>
+                        <Button size="l" stretched style={{ marginRight: 8 }} onClick={() => this.onModalAction(true, "cameraModal")}>
                             Разрешить
                         </Button>
-                        <Button size="l" stretched mode="secondary" onClick={() => this.onCameraModalAction(false)}>
+                        <Button size="l" stretched mode="secondary" onClick={() => this.onModalAction(false, "cameraModal")}>
                             Запретить
                         </Button>
                     </Div>
                 </ModalCard>
                 <ModalCard id="notesModal"
-                           onClose={() => this.onNotesModalAction(false)}
+                           onClose={() => this.onModalWithTextAction(false, "notesModal", this.state.notesText)}
                            header="Расскажите о растении"
                            actions={
-                               <Button size="l" mode="primary" onClick={() => this.onNotesModalAction(true)}>
+                               <Button size="l" mode="primary" onClick={() => this.onModalWithTextAction(true, "notesModal", this.state.notesText)}>
                                    Сохранить
                                </Button>
                            }
                 >
-                    <Textarea value={this.state.notesText} onChange={this.onNotesTextChanges} defaultValue="Подарил Вася на др"/>
+                    <Textarea value={this.state.notesText} onChange={this.onNotesTextChanges} defaultValue="Подарила Аня на новый год"/>
                 </ModalCard>
-                <ModalPage
+                <ModalCard
+                    id="plantNameModal"
+                    onClose={() => this.onModalWithTextAction(false, "plantNameModal", this.state.plantName)}
+                    header="Введите имя растения"
+                    actions={
+                        <Button size="l" mode="primary" onClick={() => this.onModalWithTextAction(true, "plantNameModal", this.state.plantName)}>
+                            Сохранить
+                        </Button>
+                    }
+                >
+                    <Textarea value={this.state.plantName} onChange={this.onPlantNameChange} defaultValue="Колючий друг" />
+                </ModalCard>
+                <ModalCard
+                    id="nonExistentPlantModal"
+                    onClose={() => this.onModalAction(false, "nonExistentPlantModal")}
+                    icon={<Icon56DoNotDisturbOutline/>}
+                    header="Похоже, в нашей базе пока нет такого растения"
+                    subheader="Мы постараемся добавить его как можно скорее."
+                    actions={
+                        <Button size="l" mode="primary" onClick={() => this.onModalAction(false, "nonExistentPlantModal")}>
+                            Понятно
+                        </Button>
+                    }
+                >
+                </ModalCard>
+                {/*<ModalPage
                     id="instructionModal"
-                    onClose={() => this.onCameraModalAction(false)}
+                    onClose={() => this.onModalAction(false, "instructionModal")}
                     settlingHeight={100}>
                     <div className="instruction__header">
                         <svg height="15vh" width="100%">
@@ -111,10 +136,10 @@ class Modal extends Component {
                     <div className="instruction__button-container">
                         <Button before={<Icon24Camera/>} size="l"
                                 className="instruction__button"
-                                onClick={() => this.onCameraModalAction(true)}>Начнём
+                                onClick={() => this.onModalAction(true, "instructionModal")}>Начнём
                         </Button>
                     </div>
-                </ModalPage>
+                </ModalPage>*/}
             </ModalRoot>
         );
     }

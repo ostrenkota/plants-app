@@ -4,6 +4,8 @@ import {Group, FormItem, Textarea} from "@vkontakte/vkui";
 import {Icon24WriteOutline} from "@vkontakte/icons";
 import {clearModal, openModal} from "../../../../../../redux/actions/modal";
 import {connect} from "react-redux";
+import plantsApi from "../../../../../../core/axios/api/plantsApi";
+import {fetchUser} from "../../../../../../redux/actions/user";
 
 class NotesBlock extends Component {
     constructor(props) {
@@ -31,18 +33,19 @@ class NotesBlock extends Component {
         this.props.openModal('notesModal');
     }
 
-    sendNewNoteToServer(note) {
-        console.log(note);
+    async sendNewNoteToServer(note) {
+        await plantsApi.addPlantInfo({plantObjectId: this.props.plantObjectId, note});
+        this.props.fetchUser();
+
     }
 
     render() {
-        console.log(this.props.dialogResult);
         return (
             <div className="notes">
                 <Group>
                     <Icon24WriteOutline className="notes__edit" onClick={this.onEditClick}/>
                     <FormItem top="Заметки" className="notes__title">
-                        <Textarea value={this.state.noteText} disabled={true} placeholder="Сюда можно добавить любую информацию о растении"/>
+                        <Textarea value={this.state.noteText || this.props.note} disabled={true} placeholder="Сюда можно добавить любую информацию о растении"/>
                     </FormItem>
                 </Group>
             </div>
@@ -58,4 +61,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {openModal, clearModal})(NotesBlock);
+export default connect(mapStateToProps, {openModal, clearModal, fetchUser})(NotesBlock);

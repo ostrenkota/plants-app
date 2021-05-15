@@ -6,19 +6,21 @@ import { connect } from "react-redux";
 import {clearModal, openModal} from "../../../../../../redux/actions/modal";
 import {openInstruction, clearInstruction} from "../../../../../../redux/actions/instruction";
 import {fetchUser} from "../../../../../../redux/actions/user";
+import plantsApi from "../../../../../../core/axios/api/plantsApi";
 
 class AddPlant extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            initFileInput: false
-
+            initFileInput: false,
+            plantName: '',
+            plantId: '',
         }
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (!prevProps.dialogResult && this.props.dialogResult) {
+    async componentDidUpdate(prevProps, prevState, snapshot) {
+        if (!prevProps.dialogResult && this.props.dialogResult && this.props.modalId === 'cameraModal') {
             if (this.props.dialogResult.confirm) {
 
                 if (!this.props.plants?.length && !this.props.instructionConfirmed) {
@@ -28,7 +30,7 @@ class AddPlant extends Component {
                         initFileInput: true
                     });
                 }
-                this.props.updatePermissionAndSendToServer();
+                //   this.props.updatePermissionAndSendToServer();
             }
             this.props.clearModal();
         }
@@ -39,6 +41,21 @@ class AddPlant extends Component {
                 initFileInput: true
             });
             this.props.clearInstruction();
+        }
+
+        if (!prevProps.dialogResult && this.props.dialogResult && this.props.modalId === 'plantNameModal') {
+            if (this.props.dialogResult.confirm) {
+                this.setState({
+                    plantName: this.props.dialogResult.text
+                });
+                await this.sendNameToServer(this.props.dialogResult.text);
+                this.props.fetchUser();
+            }
+            this.props.clearModal();
+        }
+
+        if (!prevProps.dialogResult && this.props.dialogResult && this.props.modalId === 'nonExistentPlantModal') {
+            this.props.clearModal();
         }
     }
 
@@ -62,14 +79,26 @@ class AddPlant extends Component {
         this.props.openModal('cameraModal');
     }
 
-    onFileSelect = (file) => {
-        console.log(file);
+    onFileSelect = async file => {
+        const response = await plantsApi.addPlant(file);
+        if(response.errorCode === 1001){
+            this.props.openModal('nonExistentPlantModal');
+        } else {
+            this.props.openModal('plantNameModal');
+            this.setState({
+                plantId: response._id
+            })
+        }
     }
 
     onInputClick = () => {
         this.setState({
             initFileInput: false
         })
+    }
+
+    async sendNameToServer(name) {
+        const response = await plantsApi.addPlantInfo({plantObjectId: this.state.plantId, plantName: name})
     }
 
     render() {
@@ -95,5 +124,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    { openModal, clearModal, openInstruction, clearInstruction, updatePermissionAndSendToServer: fetchUser }
+    { openModal, clearModal, openInstruction, clearInstruction, updatePermissionAndSendToServer: () => {}, fetchUser }
 )(AddPlant);

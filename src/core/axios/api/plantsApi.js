@@ -5,12 +5,14 @@ export default {
         const result = await httpClient.get("/user");
         return result.data;
     },
-    async addPlant(formData) {
-        const result = await httpClient.post("/add-plant", formData);
+    async addPlant(file) {
+        const formData = new FormData();
+        formData.append("image", file, file.name);
+        const result = await httpClient.post("/user/add-plant", formData);
         return result.data;
     },
     async addPlantInfo(body) {
-        const result = await httpClient.post("/add-plant-info", body);
+        const result = await httpClient.post("/user/add-plant-info", body);
         return result.data;
     },
     async getPlantInfo(plantApiId) {
