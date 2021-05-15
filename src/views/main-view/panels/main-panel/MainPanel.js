@@ -24,7 +24,7 @@ class MainPanel extends Component {
   };
 
   getFilteredPlants = () => {
-    return !this.state.search ? this.props.plantsList : this.props.plantsList.filter(plant => plant.name.include(this.state.search));
+    return !this.state.search ? this.props.plantsList : this.props.plantsList.filter(plant => plant.name.includes(this.state.search));
   }
 
   render() {
@@ -40,7 +40,7 @@ class MainPanel extends Component {
           Мой Сад
         </PanelHeader>
         <Search
-          disabled={!this.state.plantsList?.length}
+          disabled={!this.props.plantsList?.length}
           value={this.state.search}
           onChange={this.onChange}
           after={null}

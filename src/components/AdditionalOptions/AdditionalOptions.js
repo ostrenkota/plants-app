@@ -34,7 +34,7 @@ class AdditionalOptions extends Component {
                 <List>
                     <Cell onClick={this.onRenameClick}>
                         <Icon24Write className="additional-options__icon"/>Переименовать</Cell>
-                    <Cell onClick={this.onRemoveClick}>
+                    <Cell onClick={this.onRemoveClick} style={{paddingBottom: 8}}>
                         <Icon24Delete className="additional-options__icon"/>Удалить
                     </Cell>
                 </List>
