@@ -61,11 +61,11 @@ class MainPanel extends Component {
           after={null}
           className={!this.state.plantsList?.length ?"search-bar_disabled" : ""}
         />
-        {this.props.plantsList?.length ? (
-          <PlantsList plantsList={this.getFilteredPlants()} onCardClick={this.props.onCardClick}/>
-        ) : (
-          <EmptyLayout emitAddClick={this.emitAddClick}/>
-        )}
+        {!this.props.userDataLoading &&
+        (this.props.plantsList?.length ?
+            <PlantsList plantsList={this.getFilteredPlants()} onCardClick={this.props.onCardClick}/> :
+            <EmptyLayout emitAddClick={this.emitAddClick}/>)
+        }
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './MainView.scss';
-import {Panel, View} from "@vkontakte/vkui";
+import {Panel, ScreenSpinner, View} from "@vkontakte/vkui";
 import {CardPanel, MainPanel} from "./panels";
 import Modal from "../../components/modals/Modal";
 import { connect } from "react-redux";
@@ -14,7 +14,8 @@ class MainView extends Component {
 
         this.state = {
             activePanel: 'main-panel',
-            selectedPlant: null
+            selectedPlant: null,
+            popout: <ScreenSpinner />
         }
     }
 
@@ -38,6 +39,11 @@ class MainView extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        if (!this.props.userDataLoading && prevProps.userDataLoading) {
+            this.setState({
+                popout: null
+            })
+        }
         if (this.props.instructionOpened !== prevProps.instructionOpened) {
             this.setState({
                 activePanel: this.props.instructionOpened ? 'instruction-panel' : 'main-panel'
@@ -47,9 +53,10 @@ class MainView extends Component {
 
     render() {
         return (
-            <View id={this.props.id} activePanel={this.state.activePanel} modal={<Modal />}>
+            <View id={this.props.id} activePanel={this.state.activePanel} modal={<Modal />} popout={this.state.popout}>
                 <Panel id="main-panel">
                     <MainPanel
+                        userDataLoading={this.props.userDataLoading}
                         onCardClick={this.onCardClick}
                     />
                 </Panel>
@@ -64,10 +71,9 @@ class MainView extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        instructionOpened: state.instruction.isOpen
-    }
-}
+const mapStateToProps = state => ({
+    instructionOpened: state.instruction.isOpen,
+    userDataLoading: !state.user?.userData
+})
 
 export default connect(mapStateToProps, {})(MainView);
