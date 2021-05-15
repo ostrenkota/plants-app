@@ -5,6 +5,10 @@ export default {
         const result = await httpClient.get("/user");
         return result.data;
     },
+    async setUserInfo(body) {
+        const result = await httpClient.post("/user", body);
+        return result.data;
+    },
     async addPlant(file) {
         const formData = new FormData();
         formData.append("image", file, file.name);
