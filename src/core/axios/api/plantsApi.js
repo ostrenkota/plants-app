@@ -12,7 +12,7 @@ export default {
     async addPlant(file) {
         const formData = new FormData();
         formData.append("image", file, file.name);
-        const result = await httpClient.post("/user/add-plant", formData);
+        const result = await httpClient.post("/user/plants", formData);
         return result.data;
     },
     async addPlantInfo(id, body) {

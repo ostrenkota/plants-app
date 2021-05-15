@@ -7,6 +7,7 @@ import {clearModal, openModal} from "../../../../../../redux/actions/modal";
 import {openInstruction, clearInstruction} from "../../../../../../redux/actions/instruction";
 import {fetchUser} from "../../../../../../redux/actions/user";
 import plantsApi from "../../../../../../core/axios/api/plantsApi";
+import {serverUrl} from "../../../../../../core/axios/httpClient";
 
 class AddPlant extends Component {
 
@@ -84,7 +85,10 @@ class AddPlant extends Component {
         if(response.errorCode === 1001){
             this.props.openModal('nonExistentPlantModal');
         } else {
-            this.props.openModal('plantNameModal');
+            this.props.openModal('plantNameModal', {
+                img: `${serverUrl}/img/${response.picture}`,
+                plantLabel: response.label
+            });
             this.setState({
                 plantId: response._id
             })

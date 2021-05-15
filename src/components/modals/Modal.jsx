@@ -92,6 +92,14 @@ class Modal extends Component {
                         </Button>
                     }
                 >
+                    <Div style={{display: 'flex', alignItems: "center", flexDirection: "column"}}>
+                        { this.props?.input?.img &&
+                        <Avatar size={104} src={this.props?.input?.img} />
+                        }
+                        { this.props?.input?.plantLabel &&
+                        <Title level="3" weight="semibold" style={{ marginBottom: 16 }}>{this.props?.input?.plantLabel}</Title>
+                        }
+                    </Div>
                     <Textarea value={this.state.plantName} onChange={this.onPlantNameChange} defaultValue="Колючий друг" />
                 </ModalCard>
                 <ModalCard
