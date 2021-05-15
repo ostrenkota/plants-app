@@ -29,7 +29,7 @@ const SEASONS = [
 ]
 
 function getCurrentSeason() {
-    let month = new Date().getMonth();
+    let month = new Date().getMonth().toString();
     let season = '';
     switch (month) {
         case '11':
@@ -77,7 +77,11 @@ function getCurrentSeason() {
             const orderedSeasons = Object.keys(SEASONS)
                 .map(id => +id + this.state.selectedSeasonIndex)
                 .map(id => id % SEASONS.length)
-                .map(index => SEASONS[index])
+                .map(index => SEASONS[index]);
+
+            const extendedPlantInfo = this.props.seasonsInfo
+                ?.find(season => season.seasonName === orderedSeasons[0].name);
+
             return (
                 <div>
                     <p className="title">Уход</p>
@@ -92,11 +96,13 @@ function getCurrentSeason() {
                                     <ul className="care-card__info">
                                         <li className="care-card__watering">
                                             <Icon20WaterDropOutline className="care-card__icon"/>
-                                            <p>Полив раз в 1-2 дня</p>
+                                            <p>
+                                                Полив {extendedPlantInfo?.watering?.toLowerCase()}
+                                            </p>
                                         </li>
                                         <li className="care-card__place">
                                             <Icon20PlaceOutline className="care-card__icon"/>
-                                            <p>Расположить на балконе у окна</p>
+                                            <p>{extendedPlantInfo?.place}</p>
                                         </li>
                                     </ul>
                                 </div>
