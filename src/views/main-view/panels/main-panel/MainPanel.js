@@ -13,8 +13,23 @@ class MainPanel extends Component {
     super(props);
 
     this.state = {
-      search: ""
+      search: "",
+      clickAdd: false
     };
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.state.clickAdd && !prevState.clickAdd) {
+      this.setState({
+        clickAdd: false
+      })
+    }
+  }
+
+  emitAddClick = () => {
+    this.setState({
+      clickAdd: true
+    })
   }
 
   onChange = (e) => {
@@ -33,7 +48,7 @@ class MainPanel extends Component {
         <PanelHeader
             className="main-panel__header"
             left={
-              <AddPlant openInstruction={this.props.openInstruction}/>
+              <AddPlant clickAdd={this.state.clickAdd} openInstruction={this.props.openInstruction}/>
             }
             separator={false}
         >
@@ -49,7 +64,7 @@ class MainPanel extends Component {
         {this.props.plantsList?.length ? (
           <PlantsList plantsList={this.getFilteredPlants()} onCardClick={this.props.onCardClick}/>
         ) : (
-          <EmptyLayout />
+          <EmptyLayout emitAddClick={this.emitAddClick}/>
         )}
       </div>
     );

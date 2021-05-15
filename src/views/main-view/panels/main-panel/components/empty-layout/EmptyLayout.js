@@ -6,11 +6,11 @@ import {PlantsPlaceholder} from "../../../../../../resources/icons";
 class EmptyLayout extends Component {
     render() {
         return (
-            <div className="placeholder">
+            <div className="placeholder" style={{position: "static"}}>
                 <Placeholder
                     icon={<PlantsPlaceholder />}
                     header="Ваш сад пока пуст"
-                    action={<Button size="m"> Добавить растение</Button>}
+                    action={<Button size="m" onClick={this.props.emitAddClick}> Добавить растение</Button>}
                 >
                     Здесь будут отображаться растения, которые Вы добавите
                 </Placeholder>

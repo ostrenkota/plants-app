@@ -21,6 +21,9 @@ class AddPlant extends Component {
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.clickAdd && !prevProps.clickAdd) {
+            this.onAddClick();
+        }
         if (!prevProps.dialogResult && this.props.dialogResult && this.props.modalId === 'cameraModal') {
             if (this.props.dialogResult.confirm) {
 
