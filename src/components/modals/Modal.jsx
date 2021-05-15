@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Button, Card, Div, ModalCard, ModalPage, ModalRoot, Textarea} from "@vkontakte/vkui";
+import {Avatar, Button, Card, Div, ModalCard, ModalPage, ModalRoot, Textarea, Title} from "@vkontakte/vkui";
 import {closeModal} from "../../redux/actions/modal";
-import {Icon48CameraOutline, Icon56DoNotDisturbOutline} from "@vkontakte/icons";
+import {Icon48CameraOutline, Icon56DeleteOutline, Icon56DoNotDisturbOutline} from "@vkontakte/icons";
 import "./Modal.scss";
 
 function mapStateToProps(state) {
     return {
         modalId: state.modal.id,
-        isOpen: state.modal.isOpen
+        isOpen: state.modal.isOpen,
+        input: state.modal.input
     };
 }
 
@@ -22,12 +23,23 @@ class Modal extends Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.modalId === 'editPlantNameModal' && prevProps.modalId !== 'editPlantNameModal') {
+            this.setState({
+                plantName: this.props.input.plantName
+            });
+        }
+    }
+
     onModalAction = (confirm, modalName) => {
         this.props.closeModal(modalName, { confirm })
     }
 
     onModalWithTextAction = (confirm, modalName, text) => {
-        this.props.closeModal(modalName, { confirm, text: text })
+        this.props.closeModal(modalName, { confirm, text: text });
+        this.setState({
+            plantName: ''
+        });
     }
 
     onNotesTextChanges = (e) => {
@@ -95,51 +107,45 @@ class Modal extends Component {
                     }
                 >
                 </ModalCard>
-                {/*<ModalPage
-                    id="instructionModal"
-                    onClose={() => this.onModalAction(false, "instructionModal")}
-                    settlingHeight={100}>
-                    <div className="instruction__header">
-                        <svg height="15vh" width="100%">
-                            <ellipse cx="50%" cy="30%" rx="60%" ry="60%"
-                                     style={{fill:"var(--secondary-backgroung-color)"}} />
-                        </svg>
-                        <p className="instruction__title">3 секрета правильного фото</p>
-                    </div>
-                    <Card size="l" mode="shadow" className="instruction-card">
-                        <div className="instruction-card__wrapper">
-                            <p className="instruction-card__title">Одно растение на фото</p>
-                            <div className="instruction-card__photos">
-                                <img src={GoodPhoto} className="instruction-card__photo"/>
-                                <img src={BadPhoto} className="instruction-card__photo"/>
-                            </div>
-                        </div>
-                    </Card>
-                    <Card size="l" mode="shadow" className="instruction-card">
-                        <div className="instruction-card__wrapper">
-                            <p className="instruction-card__title">Хорошо видны листья</p>
-                            <div className="instruction-card__photos">
-                                <img src={GoodPhoto1} className="instruction-card__photo"/>
-                                <img src={BadPhoto1} className="instruction-card__photo"/>
-                            </div>
-                        </div>
-                    </Card>
-                    <Card size="l" mode="shadow" className="instruction-card">
-                        <div className="instruction-card__wrapper">
-                            <p className="instruction-card__title">Хорошее освещение и четкость</p>
-                            <div className="instruction-card__photos">
-                                <img src={GoodPhoto2} className="instruction-card__photo"/>
-                                <img src={BadPhoto2} className="instruction-card__photo"/>
-                            </div>
-                        </div>
-                    </Card>
-                    <div className="instruction__button-container">
-                        <Button before={<Icon24Camera/>} size="l"
-                                className="instruction__button"
-                                onClick={() => this.onModalAction(true, "instructionModal")}>Начнём
+                <ModalCard
+                    id="confirmDeletion"
+                    onClose={() => this.onModalAction(false, "confirmDeletion")}
+                    icon={<Icon56DeleteOutline/>}
+                    header={`Вы точно хотите удалить растение ${this.props?.input?.plantName}?`}
+                    subheader="Отменить это действие будет невозможно."
+                >
+                    <Div style={{display: 'flex'}}>
+                        <Button size="l" stretched style={{ marginRight: 8 }} onClick={() => this.onModalAction(false, "confirmDeletion")}>
+                            Отменить
                         </Button>
-                    </div>
-                </ModalPage>*/}
+                        <Button size="l" stretched mode="secondary" onClick={() => this.onModalAction(this.props?.input?.id, "confirmDeletion")}>
+                            Удалить
+                        </Button>
+                    </Div>
+                </ModalCard>
+                <ModalCard
+                    id="editPlantNameModal"
+                    onClose={() => this.onModalWithTextAction(false, "editPlantNameModal", this.state.plantName)}
+                    header="Измените название растения"
+                >
+                    <Div style={{display: 'flex', alignItems: "center", flexDirection: "column"}}>
+                    { this.props?.input?.img &&
+                        <Avatar size={104} src={this.props?.input?.img} />
+                    }
+                    { this.props?.input?.plantLabel &&
+                        <Title level="3" weight="semibold" style={{ marginBottom: 16 }}>{this.props?.input?.plantLabel}</Title>
+                    }
+                    </Div>
+                    <Textarea value={this.state.plantName} onChange={this.onPlantNameChange} />
+                    <Div style={{display: 'flex'}}>
+                        <Button size="l" stretched mode="secondary" style={{ marginRight: 8 }} onClick={() => this.onModalAction(false, "editPlantNameModal")}>
+                            Отменить
+                        </Button>
+                        <Button size="l" stretched onClick={() => this.onModalWithTextAction(this.props?.input?.id, "editPlantNameModal", this.state.plantName)}>
+                            Сохранить
+                        </Button>
+                    </Div>
+                </ModalCard>
             </ModalRoot>
         );
     }

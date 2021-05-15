@@ -98,7 +98,7 @@ class AddPlant extends Component {
     }
 
     async sendNameToServer(name) {
-        const response = await plantsApi.addPlantInfo({plantObjectId: this.state.plantId, plantName: name})
+        const response = await plantsApi.addPlantInfo( this.state.plantId,{plantName: name})
     }
 
     render() {

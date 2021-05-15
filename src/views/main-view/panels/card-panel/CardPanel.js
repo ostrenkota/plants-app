@@ -21,7 +21,6 @@ class CardPanel extends Component {
         this.setState({
             plantInfo: plantInfo || {}
         });
-        console.log(this.state.plantInfo);
     }
 
     render() {

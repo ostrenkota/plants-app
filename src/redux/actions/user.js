@@ -11,7 +11,6 @@ const updatePermission = () => ({
 
 export const fetchUser = () => async dispatch => {
     const user = await plantsApi.getUser();
-    console.log('user', user);
     dispatch(setUser(user));
 }
 

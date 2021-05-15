@@ -11,9 +11,7 @@ const PlantsList = ({plantsList, onCardClick}) => {
                     key={plant.id}
                 >
                     <PlantCard
-                        img={plant.img}
-                        name={plant.name}
-                        description={plant.description}
+                        plant={plant}
                     />
                 </li>
                 )

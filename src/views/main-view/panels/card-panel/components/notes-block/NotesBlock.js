@@ -34,7 +34,7 @@ class NotesBlock extends Component {
     }
 
     async sendNewNoteToServer(note) {
-        await plantsApi.addPlantInfo({plantObjectId: this.props.plantObjectId, note});
+        await plantsApi.addPlantInfo(this.props.plantObjectId,{note});
         this.props.fetchUser();
 
     }

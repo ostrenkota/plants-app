@@ -62,6 +62,7 @@ const mapStateToProps = state => ({
     img: `${serverUrl}/img/${plant.picture}`,
     name: plant.plantName,
     description: plant.description,
+    label: plant.label,
     plantId: plant.plantId,
     note: plant.note,
     notifications: plant.notifications

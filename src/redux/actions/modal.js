@@ -1,6 +1,7 @@
-export const openModal = id => ({
+export const openModal = (id, input) => ({
     type: 'MODAL:OPEN',
-     id
+    id,
+    input
 })
 
 export const closeModal = (id, dialogResult) => ({

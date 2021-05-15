@@ -1,7 +1,8 @@
 const defaultModalState = {
     id: null,
     isOpen: false,
-    dialogResult: undefined
+    dialogResult: undefined,
+    input: undefined
 }
 
 
@@ -12,7 +13,8 @@ function modal(state = defaultModalState, action) {
                 ...state,
                 id: action.id,
                 isOpen: true,
-                dialogResult: undefined
+                dialogResult: undefined,
+                input: action.input
             })
         }
         case 'MODAL:CLOSE': {
@@ -28,7 +30,8 @@ function modal(state = defaultModalState, action) {
                 ...state,
                 id: null,
                 isOpen: false,
-                dialogResult: undefined
+                dialogResult: undefined,
+                input: undefined
             })
         }
         default:

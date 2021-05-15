@@ -15,12 +15,16 @@ export default {
         const result = await httpClient.post("/user/add-plant", formData);
         return result.data;
     },
-    async addPlantInfo(body) {
-        const result = await httpClient.post("/user/add-plant-info", body);
+    async addPlantInfo(id, body) {
+        const result = await httpClient.put(`/user/plants/${id}`, body);
         return result.data;
     },
     async getPlantInfo(plantApiId) {
         const result = await httpClient.get(`/plants/${plantApiId}`);
+        return result.data;
+    },
+    async deletePlant(plantObjectId) {
+        const result = await httpClient.delete(`user/plants/${plantObjectId}`);
         return result.data;
     }
 }

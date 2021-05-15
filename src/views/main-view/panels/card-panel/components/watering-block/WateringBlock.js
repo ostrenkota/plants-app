@@ -37,7 +37,7 @@ class WateringBlock extends Component {
             notificationsChecked,
             frequency
         });
-        await plantsApi.addPlantInfo({plantObjectId: this.props.plant.id, notifications: frequency});
+        await plantsApi.addPlantInfo(this.props.plant.id, {notifications: frequency});
         this.props.fetchUser();
     }
 
@@ -48,7 +48,7 @@ class WateringBlock extends Component {
             frequency,
             notificationsChecked
         });
-        await plantsApi.addPlantInfo({plantObjectId: this.props.plant.id, notifications: frequency});
+        await plantsApi.addPlantInfo(this.props.plant.id, {notifications: frequency});
         this.props.fetchUser();
     }
 
