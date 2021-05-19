@@ -2,7 +2,12 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Avatar, Button, Card, Div, ModalCard, ModalPage, ModalRoot, Textarea, Title} from "@vkontakte/vkui";
 import {closeModal} from "../../redux/actions/modal";
-import {Icon48CameraOutline, Icon56DeleteOutline, Icon56DoNotDisturbOutline} from "@vkontakte/icons";
+import {
+    Icon48CameraOutline,
+    Icon48WritebarSend,
+    Icon56DeleteOutline,
+    Icon56DoNotDisturbOutline
+} from "@vkontakte/icons";
 import "./Modal.scss";
 
 function mapStateToProps(state) {
@@ -31,8 +36,8 @@ class Modal extends Component {
         }
     }
 
-    onModalAction = (confirm, modalName) => {
-        this.props.closeModal(modalName, { confirm })
+    onModalAction = (confirm, modalName, payload = {}) => {
+        this.props.closeModal(modalName, { confirm, ...payload })
     }
 
     onModalWithTextAction = (confirm, modalName, text) => {
@@ -67,6 +72,20 @@ class Modal extends Component {
                             Разрешить
                         </Button>
                         <Button size="l" stretched mode="secondary" onClick={() => this.onModalAction(false, "cameraModal")}>
+                            Запретить
+                        </Button>
+                    </Div>
+                </ModalCard>
+                <ModalCard id="notificationsModal"
+                           onClose={() => this.onModalAction(false, "notificationsModal")}
+                           icon={<Icon48WritebarSend className="modal-card__icon"/>}
+                           header="Приложение запрашивает доступ к отправке уведомлений"
+                           subheader="Вы сможете получать уведомления о поливе и не оставлять любимые растения без воды">
+                    <Div style={{display: 'flex'}}>
+                        <Button size="l" stretched style={{ marginRight: 8 }} onClick={() => this.onModalAction(true, "notificationsModal", {input: this.props.input})}>
+                            Разрешить
+                        </Button>
+                        <Button size="l" stretched mode="secondary" onClick={() => this.onModalAction(false, "notificationsModal")}>
                             Запретить
                         </Button>
                     </Div>

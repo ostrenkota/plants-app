@@ -4,6 +4,7 @@ import './WateringBlock.scss';
 import plantsApi from "../../../../../../core/axios/api/plantsApi";
 import {fetchUser} from "../../../../../../redux/actions/user";
 import {connect} from "react-redux";
+import {clearModal, openModal} from "../../../../../../redux/actions/modal";
 
 class WateringBlock extends Component {
     constructor(props) {
@@ -11,7 +12,24 @@ class WateringBlock extends Component {
 
         this.state = {
             notificationsChecked: undefined,
-            frequency: ''
+            frequency: '',
+            permission: false
+        }
+    }
+
+    async componentDidUpdate(prevProps, prevState, snapshot) {
+        if (!prevProps.dialogResult && this.props.dialogResult && this.props.modalId === 'notificationsModal') {
+            if (this.props.dialogResult.confirm) {
+                this[this.props.dialogResult.input.method](this.props.dialogResult.input.param);
+                await plantsApi.setUserInfo({notifications: true});
+                this.props.fetchUser();
+            }
+            this.props.clearModal();
+        }
+        if (!prevProps.permission && this.props.permission) {
+            this.setState({
+                permission: this.props.permission
+            })
         }
     }
 
@@ -22,10 +40,21 @@ class WateringBlock extends Component {
                 frequency: this.props.plant.notifications,
             })
         }
+
+        this.setState({
+            permission: this.props.permission
+        })
     }
 
     onNotificationsToggled = async e => {
-        const notificationsChecked = !!e.target.checked;
+        if (!this.state.permission) {
+            this.props.openModal('notificationsModal', {method: 'continueNotificationsToggled', param: !!e.target.checked});
+            return;
+        }
+        this.continueNotificationsToggled(!!e.target.checked);
+    }
+
+    continueNotificationsToggled = async notificationsChecked => {
         let frequency = this.state.frequency;
         if (notificationsChecked){
             frequency || (frequency = '1');
@@ -42,7 +71,14 @@ class WateringBlock extends Component {
     }
 
     onNotificationsFrequencyChanged = async e => {
-        const frequency = e.target.value;
+        if (!this.state.permission) {
+            this.props.openModal('notificationsModal', {method: 'continueNotificationsFrequencyChanged', param: e.target.value});
+            return;
+        }
+        this.continueNotificationsFrequencyChanged(e.target.value);
+    }
+
+    continueNotificationsFrequencyChanged = async frequency => {
         const notificationsChecked = !!frequency;
         this.setState({
             frequency,
@@ -88,4 +124,10 @@ class WateringBlock extends Component {
     }
 }
 
-export default connect(null, {fetchUser})(WateringBlock);
+const mapStateToProps = state => ({
+    permission: state.user.userData?.permissions.notifications,
+    modalId: state.modal.id,
+    dialogResult: state.modal.dialogResult,
+})
+
+export default connect(mapStateToProps, {fetchUser, openModal, clearModal})(WateringBlock);
