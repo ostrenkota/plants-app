@@ -14,8 +14,7 @@ class MainView extends Component {
 
         this.state = {
             activePanel: 'main-panel',
-            selectedPlant: null,
-            popout: <ScreenSpinner />
+            selectedPlant: null
         }
     }
 
@@ -39,11 +38,6 @@ class MainView extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (!this.props.userDataLoading && prevProps.userDataLoading) {
-            this.setState({
-                popout: null
-            })
-        }
         if (this.props.instructionOpened !== prevProps.instructionOpened) {
             this.setState({
                 activePanel: this.props.instructionOpened ? 'instruction-panel' : 'main-panel'
@@ -53,7 +47,7 @@ class MainView extends Component {
 
     render() {
         return (
-            <View id={this.props.id} activePanel={this.state.activePanel} modal={<Modal />} popout={this.state.popout}>
+            <View id={this.props.id} activePanel={this.state.activePanel} modal={<Modal />}>
                 <Panel id="main-panel">
                     <MainPanel
                         userDataLoading={this.props.userDataLoading}
@@ -73,7 +67,6 @@ class MainView extends Component {
 
 const mapStateToProps = state => ({
     instructionOpened: state.instruction.isOpen,
-    userDataLoading: !state.user?.userData
 })
 
 export default connect(mapStateToProps, {})(MainView);

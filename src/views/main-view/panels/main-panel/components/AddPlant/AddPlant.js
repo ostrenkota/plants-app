@@ -34,7 +34,7 @@ class AddPlant extends Component {
                         initFileInput: true
                     });
                 }
-                //   this.props.updatePermissionAndSendToServer();
+                this.updatePermissionAndSendToServer();
             }
             this.props.clearModal();
         }
@@ -61,6 +61,11 @@ class AddPlant extends Component {
         if (!prevProps.dialogResult && this.props.dialogResult && this.props.modalId === 'nonExistentPlantModal') {
             this.props.clearModal();
         }
+    }
+
+    async updatePermissionAndSendToServer() {
+        await plantsApi.setUserInfo({camera: true});
+        fetchUser();
     }
 
     componentDidMount() {
@@ -119,17 +124,17 @@ class AddPlant extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
         modalId: state.modal.id,
         dialogResult: state.modal.dialogResult,
         plants: state.user.plants,
-        permission: state.user.permission,
-        instructionConfirmed: state.instruction.confirmed
+        instructionConfirmed: state.instruction.confirmed,
+        permission: state.user?.userData?.permissions?.camera
     }
 }
 
 export default connect(
     mapStateToProps,
-    { openModal, clearModal, openInstruction, clearInstruction, updatePermissionAndSendToServer: () => {}, fetchUser }
+    { openModal, clearModal, openInstruction, clearInstruction, fetchUser }
 )(AddPlant);
