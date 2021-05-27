@@ -1,13 +1,16 @@
 import axios from "axios";
 
+const vkQuery = window.location.search.slice(1);
+
 const http = axios.create({
     headers: {
-       // Authorization: `Bearer ${window.location.search.slice(1)}`
-        Authorization: `Bearer vk_user_id=1234567`
+        Authorization: `Bearer ${vkQuery}`
     }
 });
 
-http.defaults.baseURL  = "http://localhost:8888/api";
-export const serverUrl =  "http://localhost:8888";
+//http.defaults.baseURL  = "https://plantsapp.online/api";
+http.defaults.baseURL  = "http://localhost:8881/api";
+//export const serverUrl =  "https://plantsapp.online";
+export const serverUrl =  "http://localhost:8881";
 
 export default http;
