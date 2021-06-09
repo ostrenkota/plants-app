@@ -160,7 +160,7 @@ class Modal extends Component {
                         <Avatar size={104} src={this.props?.input?.img} />
                     }
                     { this.props?.input?.plantLabel &&
-                        <Title level="3" weight="semibold" style={{ marginBottom: 16 }}>{this.props?.input?.plantLabel}</Title>
+                        <Title level="3" weight="semibold" style={{ marginBottom: 16 }} className="plant-name-to-change">{this.props?.input?.plantLabel}</Title>
                     }
                     </Div>
                     <Textarea value={this.state.plantName} onChange={this.onPlantNameChange} />
