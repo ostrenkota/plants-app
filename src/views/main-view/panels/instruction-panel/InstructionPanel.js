@@ -20,7 +20,7 @@ class InstructionPanel extends Component {
 
     render() {
         return (
-            <div>
+            <div className="instruction">
                 <div className="instruction__header">
                     <svg height="15vh" width="100%">
                         <ellipse cx="50%" cy="30%" rx="60%" ry="60%"
@@ -28,33 +28,35 @@ class InstructionPanel extends Component {
                     </svg>
                     <p className="instruction__title">3 секрета правильного фото</p>
                 </div>
-                <Card size="l" mode="shadow" className="instruction-card">
-                    <div className="instruction-card__wrapper">
-                        <p className="instruction-card__title">Одно растение на фото</p>
-                        <div className="instruction-card__photos">
-                            <img src={GoodPhoto} className="instruction-card__photo"/>
-                            <img src={BadPhoto} className="instruction-card__photo"/>
+                <div className="instruction__cards-container">
+                    <Card size="l" mode="shadow" className="instruction-card">
+                        <div className="instruction-card__wrapper">
+                            <p className="instruction-card__title">Одно растение на фото</p>
+                            <div className="instruction-card__photos">
+                                <img src={GoodPhoto} className="instruction-card__photo"/>
+                                <img src={BadPhoto} className="instruction-card__photo"/>
+                            </div>
                         </div>
-                    </div>
-                </Card>
-                <Card size="l" mode="shadow" className="instruction-card">
-                    <div className="instruction-card__wrapper">
-                        <p className="instruction-card__title">Хорошо видны листья</p>
-                        <div className="instruction-card__photos">
-                            <img src={GoodPhoto1} className="instruction-card__photo"/>
-                            <img src={BadPhoto1} className="instruction-card__photo"/>
+                    </Card>
+                    <Card size="l" mode="shadow" className="instruction-card">
+                        <div className="instruction-card__wrapper">
+                            <p className="instruction-card__title">Хорошо видны листья</p>
+                            <div className="instruction-card__photos">
+                                <img src={GoodPhoto1} className="instruction-card__photo"/>
+                                <img src={BadPhoto1} className="instruction-card__photo"/>
+                            </div>
                         </div>
-                    </div>
-                </Card>
-                <Card size="l" mode="shadow" className="instruction-card">
-                    <div className="instruction-card__wrapper">
-                        <p className="instruction-card__title">Хорошее освещение и четкость</p>
-                        <div className="instruction-card__photos">
-                            <img src={GoodPhoto2} className="instruction-card__photo"/>
-                            <img src={BadPhoto2} className="instruction-card__photo"/>
+                    </Card>
+                    <Card size="l" mode="shadow" className="instruction-card">
+                        <div className="instruction-card__wrapper">
+                            <p className="instruction-card__title">Хорошее освещение и четкость</p>
+                            <div className="instruction-card__photos">
+                                <img src={GoodPhoto2} className="instruction-card__photo"/>
+                                <img src={BadPhoto2} className="instruction-card__photo"/>
+                            </div>
                         </div>
-                    </div>
-                </Card>
+                    </Card>
+                </div>
                 <div className="instruction__button-container">
                     <Button onClick={this.onButtonClick} before={<Icon24Camera/>} size="l" className="instruction__button">Начнём</Button>
                 </div>

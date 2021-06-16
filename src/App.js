@@ -17,8 +17,7 @@ class App extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.isNewUser !== undefined && prevProps.isNewUser === undefined) {
             this.setState({
-             //   selectedViewId: this.props.isNewUser ? 'intro-view' : 'main-view'
-                  selectedViewId:'intro-view'
+                  selectedViewId: this.props.isNewUser ? 'intro-view' : 'main-view'
             })
         }
     }

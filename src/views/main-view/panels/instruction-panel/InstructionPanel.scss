@@ -3,7 +3,8 @@
 body{
   font-family: $font;
 
-  .instruction{
+  .instruction {
+    height: 100vh;
 
     &__header{
       width: 100%;
@@ -11,8 +12,9 @@ body{
     }
 
     &__title{
-      position: relative;
-      top: -17vh;
+      position: absolute;
+      top: 20px;
+      width: 100%;
       font-family: $font;
       text-align: center;
       font-style: normal;
@@ -20,6 +22,14 @@ body{
       font-size: 20px;
       line-height: 30px;
       color: var(--primary-backgroung-color);
+    }
+
+    &__cards-container {
+      display: flex;
+      height: 70%;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-bottom: 30px;
     }
 
     &__button-container{
@@ -34,6 +44,13 @@ body{
 
   .instruction-card {
     margin: 10px 10px;
+    flex: 1;
+    align-items: center;
+    display: flex;
+
+    & > div {
+      width: 100%;
+    }
 
     &__title{
       padding-top: 10px;
@@ -59,6 +76,10 @@ body{
     &__photo{
       margin: 10px 0;
       height: 80px;
+    }
+
+    &__wrapper {
+      width: 100%;
     }
   }
 }
