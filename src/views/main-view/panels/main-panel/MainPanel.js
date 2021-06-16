@@ -48,7 +48,11 @@ class MainPanel extends Component {
         <PanelHeader
             className="main-panel__header"
             left={
-              <AddPlant clickAdd={this.state.clickAdd} openInstruction={this.props.openInstruction}/>
+              <AddPlant
+                  clickAdd={this.state.clickAdd}
+                  openInstruction={this.props.openInstruction}
+                  toggleActivateSpinner={this.props.toggleActivateSpinner}
+              />
             }
             separator={false}
         >

@@ -89,7 +89,9 @@ class AddPlant extends Component {
     }
 
     onFileSelect = async file => {
+        this.props.toggleActivateSpinner(true);
         const response = await plantsApi.addPlant(file);
+        this.props.toggleActivateSpinner(false);
         if(response.errorCode === 1001){
             this.props.openModal('nonExistentPlantModal');
         } else {

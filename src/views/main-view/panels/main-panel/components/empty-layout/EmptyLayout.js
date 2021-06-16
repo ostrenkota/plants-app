@@ -6,7 +6,7 @@ import {PlantsPlaceholder} from "../../../../../../resources/icons";
 class EmptyLayout extends Component {
     render() {
         return (
-            <div className="placeholder" style={{position: "static"}}>
+            <div className="placeholder">
                 <Placeholder
                     icon={<PlantsPlaceholder />}
                     header="Ваш сад пока пуст"

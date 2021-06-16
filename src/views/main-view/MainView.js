@@ -14,7 +14,8 @@ class MainView extends Component {
 
         this.state = {
             activePanel: 'main-panel',
-            selectedPlant: null
+            selectedPlant: null,
+            spinner: null
         }
     }
 
@@ -45,11 +46,18 @@ class MainView extends Component {
         }
     }
 
+    toggleActivateSpinner = isActive => {
+        this.setState({
+            spinner: isActive ? <ScreenSpinner /> : null
+        });
+    }
+
     render() {
         return (
-            <View id={this.props.id} activePanel={this.state.activePanel} modal={<Modal />}>
+            <View id={this.props.id} activePanel={this.state.activePanel} modal={<Modal />} popout={this.state.spinner}>
                 <Panel id="main-panel">
                     <MainPanel
+                        toggleActivateSpinner={this.toggleActivateSpinner}
                         userDataLoading={this.props.userDataLoading}
                         onCardClick={this.onCardClick}
                     />
